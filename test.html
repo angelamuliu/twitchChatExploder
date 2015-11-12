@@ -1,0 +1,74 @@
+<HTML>
+<HEAD>
+<TITLE>Crunchify - Refresh Div without Reloading Page</TITLE>
+ 
+<style type="text/css">
+</style>
+<script type="text/javascript"
+    src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script>
+    
+var kappaLink = "http://static-cdn.jtvnw.net/emoticons/v1/25/1.0";
+
+function Message(name, message) {
+    this.name = name;
+    this.message = message;
+}
+
+var spamMessages = [
+        new Message("Joe", "<img src="+kappaLink+"/>"),
+        new Message("Stephen", "WOLOLOLOLOLOLOLO"),
+        new Message("Joe", "flying ninja bomb"),
+        new Message("Angela", "The unseen donger is the deadliest"),
+        new Message("Kappa4Lyf", "ヽ༼ຈل͜ຈ༽ﾉ RAISE YOUR DONGERS ヽ༼ຈل͜ຈ༽ﾉ "),
+        new Message("RoseRed", " (ง ͠° ͟ʖ ͡°)ง ᴛʜɪs ɪs ᴏᴜʀ ᴄʜᴀᴛ ᴍᴏᴅs (ง ͠° ͟ʖ ͡°)ง (ง •̀_•́)ง ʏᴇᴀʜ sᴘᴀᴍ ɪᴛ! (ง •̀_•́)ง"),
+        new Message("KingDoofier", "▄▄▄▀▀▀▄▄███▄<br />░░░░░▄▀▀░░░░░░░▐░▀██▌<br />░░░▄▀░░░░▄▄███░▌▀▀░▀█<br />░░▄█░░▄▀▀▒▒▒▒▒▄▐░░░░█▌<br />░▐█▀▄▀▄▄▄▄▀▀▀▀▌░░░░░▐█▄<br />░▌▄▄▀▀░░░░░░░░▌░░░░▄███████▄<br />░░░░░░░░░░░░░▐░░░░▐███████████▄<br />░░░░░le░░░░░░░▐░░░░▐█████████████▄<br />░░░░toucan░░░░░░▀▄░░░▐██████████████▄<br />░░░░░░has░░░░░░░░▀▄▄████████████████▄<br />░░░░░arrived░░░░░░░░░░░░█▀██████"),
+        new Message("Stephen", "<a href=\"google.com\">Please view my stream too!</a>"),
+    ];
+    var x = 0;
+    $(document).ready(
+            function() {
+                setInterval(function() {
+                    var newMsg = document.createElement('div');
+                    var name = document.createElement('span');
+                    name.textContent = spamMessages[x].name;
+                    name.style.color = "red"
+                    newMsg.appendChild(name);
+                    //var msgContent = document.createElement('span');
+                    //newMsg.textContent = "hrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrohorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr \n";
+                    //newMsg.appendChild(msgContent);
+                    //name.style.position = "absolute";
+                    //name.style.left="10px";
+                    //newMsg.marginLeft = 0;
+                    //newMsg.offsetLeft = 0;
+                    //newMsg.style.float = "left";
+                    //newMsg.textContent = x;
+                    newMsg.style.wordWrap = "break-word";
+                    newMsg.style.width = "100%"
+                    newMsg.style.textAlign = "left";
+                    x++;
+                    $('#show').append(newMsg);
+                    //$('#show').append(document.createElement('br'));
+                    //document.getElementById( 'bottom' ).scrollIntoView();
+                    
+
+                    //var objDiv = document.getElementById("show");
+                    //objDiv.scrollTop = objDiv.scrollHeight;
+                }, 100);
+            });
+</script>
+ 
+</HEAD>
+<BODY>
+    <br>
+    <br>
+    <div id="show" style="white-space: pre-wrap;      /* CSS3 */
+    white-space: -moz-pre-wrap; /* Firefox */
+    white-space: -pre-wrap;     /* Opera <7 */
+    white-space: -o-pre-wrap;   /* Opera 7 */
+    word-wrap: break-word; overflow:auto; height:50%; width:50%; border:1px solid black;" align="center"></div>
+    <div id="bottom"></div>
+    <input style="height:10%; width:50%; border:1px solid black;" placeholder="Send a message"> </input>
+    
+</BODY>
+</HTML>
