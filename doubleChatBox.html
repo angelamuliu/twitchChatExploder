@@ -1,0 +1,121 @@
+<HTML>
+<HEAD>
+<TITLE>Crunchify - Refresh Div without Reloading Page</TITLE>
+ 
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+<style type="text/css">
+</style>
+<script type="text/javascript"
+    src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript"
+    src="twitchers.js"></script>
+<script>
+    
+var kappaLink = "http://static-cdn.jtvnw.net/emoticons/v1/25/1.0";
+
+function Message(name, message) {
+    this.name = name;
+    this.message = message;
+}
+
+    var casualPercentage = 90;
+    var goodPercentage = 100;
+    var prevMsg = 0;
+    function doSomething() {
+        var messages = spamMessages;
+        var x = Math.floor((Math.random() * messages.length)); 
+        while (prevMsg == x)
+            x = Math.floor((Math.random() * messages.length)); 
+        var newMsg = $("<div class=\"message\"></div>");
+        var msgName = $("<span class=\"name "+messages[x].color+"\">"+messages[x].name+"</span>");
+        var msgContent = $("<span class=\"message_content\">"+messages[x].message+"</span>");
+        newMsg.append(msgName);
+        newMsg.append(msgContent);
+
+        $('#show').append(newMsg);
+        document.getElementById( 'bottom' ).scrollIntoView();
+
+
+        var objDiv = document.getElementById("show");
+        objDiv.scrollTop = objDiv.scrollHeight;
+        prevMsg = x;
+    }
+    
+    function doSomething2() {
+        casualPercentage = 30;
+        var whichGroup = Math.floor((Math.random() * 100)); 
+        if (whichGroup < casualPercentage) 
+            var messages = casualMessages;
+        else 
+            var messages = goodMessages_set1;
+        var x = Math.floor((Math.random() * messages.length)); 
+        while (prevMsg == x)
+            x = Math.floor((Math.random() * messages.length)); 
+        var newMsg = $("<div class=\"message\"></div>");
+        var msgName = $("<span class=\"name "+messages[x].color+"\">"+messages[x].name+"</span>");
+        var msgContent = $("<span class=\"message_content\">"+messages[x].message+"</span>");
+        newMsg.append(msgName);
+        newMsg.append(msgContent);
+
+        $('#goodChat').append(newMsg);
+        document.getElementById( 'bottom' ).scrollIntoView();
+
+
+        var objDiv = document.getElementById("goodChat");
+        objDiv.scrollTop = objDiv.scrollHeight;
+        prevMsg = x;
+    }
+    
+    $(document).ready(
+            function() {
+                (function loop() {
+                    var rand = Math.round(Math.random() * (1000)) + 500;
+                    setTimeout(function() {
+                        doSomething();
+                        loop();  
+                    }, rand);
+                }());
+            });
+    
+    $(document).ready(
+            function() {
+                (function loop() {
+                    var rand = Math.round(Math.random() * (1000)) + 500;
+                    setTimeout(function() {
+                        doSomething2();
+                        loop();  
+                    }, rand);
+                }());
+            });
+</script>
+ 
+</HEAD>
+<BODY>
+    <br>
+    <br>
+    <div>
+    <div style="float:left;">
+    <div id="show" style="white-space: pre-wrap;      /* CSS3 */
+    white-space: -moz-pre-wrap; /* Firefox */
+    white-space: -pre-wrap;     /* Opera <7 */
+    white-space: -o-pre-wrap;   /* Opera 7 */
+    float:left;
+    word-wrap: break-word; overflow:auto; height:40%; width:40%; border:1px solid black;" align="center"></div>
+    <div id="bottom"></div>
+    <input style="height:10%; width:40%; border:1px solid black; float:left;" placeholder="Send a message"> </input>
+    </div>
+        
+    <div>    
+    <div id="goodChat" style="white-space: pre-wrap;      /* CSS3 */
+    white-space: -moz-pre-wrap; /* Firefox */
+    white-space: -pre-wrap;     /* Opera <7 */
+    white-space: -o-pre-wrap;   /* Opera 7 */
+    float:left;
+    word-wrap: break-word; overflow:auto; height:50%; width:40%; border:1px solid black;" align="center"></div>
+    <div id="bottom"></div>
+    <input style="height:10%; width:40%; border:1px solid black;" placeholder="Send a message"> </input>
+    </div>
+    </div>
+</BODY>
+</HTML>
