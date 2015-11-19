@@ -1,0 +1,15 @@
+
+.message {
+    word-wrap: break-word;
+    width: 100%;
+    text-align: left;
+}
+
+span.name {
+    font-weight: 900;
+
+}
+
+span.message_content {
+
+}
