@@ -19,15 +19,28 @@ function Message(name, message) {
     this.message = message;
 }
 
+    var spamPercentage = 60;
+    var casualPercentage = 90;
+    var goodPercentage = 100;
+    var prevMsg = 0;
     function doSomething() {
-        var x = Math.floor((Math.random() * spamMessages.length) + 1); 
+        var whichGroup = Math.floor((Math.random() * 100)); 
+        if (whichGroup < spamPercentage)
+            var messages = spamMessages;
+        else if (whichGroup < casualPercentage) 
+            var messages = casualMessages;
+        else 
+            var messages = goodMessages_set1;
+        var x = Math.floor((Math.random() * messages.length)); 
+        while (prevMsg == x)
+            x = Math.floor((Math.random() * messages.length)); 
         var newMsg = $("<div class=\"message\"></div>");
-        var msgName = $("<span class=\"name "+spamMessages[x].color+"\">"+spamMessages[x].name+"</span>");
-        var msgContent = $("<span class=\"message_content\">"+spamMessages[x].message+"</span>");
+        var msgName = $("<span class=\"name "+messages[x].color+"\">"+messages[x].name+"</span>");
+        var msgContent = $("<span class=\"message_content\">"+messages[x].message+"</span>");
         newMsg.append(msgName);
         newMsg.append(msgContent);
 
-        
+        //console.log(x);
         $('#show').append(newMsg);
         //$('#show').append(document.createElement('br'));
         document.getElementById( 'bottom' ).scrollIntoView();
@@ -35,6 +48,7 @@ function Message(name, message) {
 
         var objDiv = document.getElementById("show");
         objDiv.scrollTop = objDiv.scrollHeight;
+        prevMsg = x;
     }
     //var x = 0;
     $(document).ready(
@@ -49,12 +63,12 @@ function Message(name, message) {
                 /*
                 setInterval(function() {
                     var newMsg = $("<div class=\"message\"></div>");
-                    var msgName = $("<span class=\"name "+spamMessages[x].color+"\">"+spamMessages[x].name+"</span>");
-                    var msgContent = $("<span class=\"message_content\">"+spamMessages[x].message+"</span>");
+                    var msgName = $("<span class=\"name "+messages[x].color+"\">"+messages[x].name+"</span>");
+                    var msgContent = $("<span class=\"message_content\">"+messages[x].message+"</span>");
                     newMsg.append(msgName);
                     newMsg.append(msgContent);
 
-                    x = Math.floor((Math.random() * spamMessages.length) + 1); 
+                    x = Math.floor((Math.random() * messages.length) + 1); 
                     $('#show').append(newMsg);
                     //$('#show').append(document.createElement('br'));
                     document.getElementById( 'bottom' ).scrollIntoView();
