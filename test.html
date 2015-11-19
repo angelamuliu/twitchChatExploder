@@ -8,6 +8,8 @@
 </style>
 <script type="text/javascript"
     src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript"
+    src="twitchers.js"></script>
 <script>
     
 var kappaLink = "http://static-cdn.jtvnw.net/emoticons/v1/25/1.0";
@@ -17,19 +19,34 @@ function Message(name, message) {
     this.message = message;
 }
 
-var spamMessages = [
-        new Message("Joe", "<img src="+kappaLink+"/>"),
-        new Message("Stephen", "WOLOLOLOLOLOLOLO"),
-        new Message("Joe", "flying ninja bomb"),
-        new Message("Angela", "The unseen donger is the deadliest"),
-        new Message("Kappa4Lyf", "ヽ༼ຈل͜ຈ༽ﾉ RAISE YOUR DONGERS ヽ༼ຈل͜ຈ༽ﾉ "),
-        new Message("RoseRed", " (ง ͠° ͟ʖ ͡°)ง ᴛʜɪs ɪs ᴏᴜʀ ᴄʜᴀᴛ ᴍᴏᴅs (ง ͠° ͟ʖ ͡°)ง (ง •̀_•́)ง ʏᴇᴀʜ sᴘᴀᴍ ɪᴛ! (ง •̀_•́)ง"),
-        new Message("KingDoofier", "▄▄▄▀▀▀▄▄███▄<br />░░░░░▄▀▀░░░░░░░▐░▀██▌<br />░░░▄▀░░░░▄▄███░▌▀▀░▀█<br />░░▄█░░▄▀▀▒▒▒▒▒▄▐░░░░█▌<br />░▐█▀▄▀▄▄▄▄▀▀▀▀▌░░░░░▐█▄<br />░▌▄▄▀▀░░░░░░░░▌░░░░▄███████▄<br />░░░░░░░░░░░░░▐░░░░▐███████████▄<br />░░░░░le░░░░░░░▐░░░░▐█████████████▄<br />░░░░toucan░░░░░░▀▄░░░▐██████████████▄<br />░░░░░░has░░░░░░░░▀▄▄████████████████▄<br />░░░░░arrived░░░░░░░░░░░░█▀██████"),
-        new Message("Stephen", "<a href=\"google.com\">Please view my stream too!</a>"),
-    ];
-    var x = 0;
+    function doSomething() {
+        var x = Math.floor((Math.random() * spamMessages.length) + 1); 
+        var newMsg = $("<div class=\"message\"></div>");
+        var msgName = $("<span class=\"name "+spamMessages[x].color+"\">"+spamMessages[x].name+"</span>");
+        var msgContent = $("<span class=\"message_content\">"+spamMessages[x].message+"</span>");
+        newMsg.append(msgName);
+        newMsg.append(msgContent);
+
+        
+        $('#show').append(newMsg);
+        //$('#show').append(document.createElement('br'));
+        document.getElementById( 'bottom' ).scrollIntoView();
+
+
+        var objDiv = document.getElementById("show");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
+    //var x = 0;
     $(document).ready(
             function() {
+                (function loop() {
+                    var rand = Math.round(Math.random() * (1000)) + 500;
+                    setTimeout(function() {
+                        doSomething();
+                        loop();  
+                    }, rand);
+                }());
+                /*
                 setInterval(function() {
                     var newMsg = $("<div class=\"message\"></div>");
                     var msgName = $("<span class=\"name "+spamMessages[x].color+"\">"+spamMessages[x].name+"</span>");
@@ -37,15 +54,18 @@ var spamMessages = [
                     newMsg.append(msgName);
                     newMsg.append(msgContent);
 
-                    x++;
+                    x = Math.floor((Math.random() * spamMessages.length) + 1); 
                     $('#show').append(newMsg);
                     //$('#show').append(document.createElement('br'));
                     document.getElementById( 'bottom' ).scrollIntoView();
                     
 
-                    //var objDiv = document.getElementById("show");
-                    //objDiv.scrollTop = objDiv.scrollHeight;
+                    var objDiv = document.getElementById("show");
+                    objDiv.scrollTop = objDiv.scrollHeight;
+                    
+                    //time = Math.floor((Math.random() * 100) + 200); 
                 }, 100);
+                */
             });
 </script>
  
