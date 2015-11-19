@@ -3,9 +3,8 @@
 <TITLE>Twitch Chat Exploder</TITLE>
  
 <meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="style.css">
-<style type="text/css">
-</style>
 <script type="text/javascript"
     src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script type="text/javascript"
@@ -22,7 +21,7 @@ function Message(name, message) {
     function doSomething() {
         var x = Math.floor((Math.random() * spamMessages.length) + 1); 
         var newMsg = $("<div class=\"message\"></div>");
-        var msgName = $("<span class=\"name "+spamMessages[x].color+"\">"+spamMessages[x].name+"</span>");
+        var msgName = $("<span class=\"name "+spamMessages[x].color+"\">"+spamMessages[x].name+": </span>");
         var msgContent = $("<span class=\"message_content\">"+spamMessages[x].message+"</span>");
         newMsg.append(msgName);
         newMsg.append(msgContent);
@@ -72,12 +71,18 @@ function Message(name, message) {
 </HEAD>
 <BODY>
     <div id="chatbox" class="exploder">
-        <div id="chat-header">
-            <span>Welcome to the chat</span>
+        <div class="chat-header">
+            <i class="fa fa-align-left"></i>
+            <div>Welcome to the chat</div>
         </div>
-        <div id="show" align="center"></div>
+        <div id="show" class="exploder" align="center"></div>
         <div id="bottom"></div>
-        <input style="height:10%; width:50%; border:1px solid black;" placeholder="Send a message"> </input>
+        <div class="send_message">
+            <input placeholder="Send a message"></input>
+            <i class="fa fa-cog"></i>
+            <i class="fa fa-list-ul"></i>
+            <button>Chat</button>
+        </div>
     </div>
     
 </BODY>

@@ -8,11 +8,18 @@ body {
     background-color: #f2f2f2;
 }
 
-#chat-header {
+.chat-header {
     padding: 20px;
-    text-align: center;
     box-shadow: inset 0 -1px 0 0 #dedede;
     font-size: 14px;
+}
+.chat-header i {
+    color: #6441a5; /* Twitch purple */
+    position: absolute;
+}
+.chat-header div {
+    width: 100%;
+    text-align: center;
 }
 
 #show {
@@ -22,10 +29,33 @@ body {
     white-space: -o-pre-wrap;   /* Opera 7 */
     word-wrap: break-word;
     overflow:auto;
-    height: 100vh;
-    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
+.send_message {
+    padding: 20px;
+    padding-bottom: 30px;
+}
+.send_message i {
+    font-size: 18px;
+    margin-right: 15px;
+    margin-top: 15px;
+    color: #6441a5; /* Twitch purple */
+}
+.send_message input {
+    width: 100%;
+    padding: 10px;
+    height: 50px;
+}
+.send_message button {
+    background-color: #6441a5;
+    float: right;
+    margin-top: 15px;
+    border: none;
+    color: white;
+    padding: 10px;
+}
 
 
 .message {
@@ -48,7 +78,14 @@ span.message_content {
     margin: 0 auto;
     width: 50%;
 }
+#show.exploder { 
+    height: 70vh;
+}
 
 /* Color styles */
 .red { color: red; }
 .blue { color: blue; }
+.orange { color: orange; }
+.green { color: green; }
+.black { color: black; }
+.brown { color: brown; }
