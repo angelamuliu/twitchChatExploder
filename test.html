@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>Crunchify - Refresh Div without Reloading Page</TITLE>
+<TITLE>Twitch Chat Exploder</TITLE>
  
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="style.css">
@@ -40,7 +40,7 @@ var spamMessages = [
                     x++;
                     $('#show').append(newMsg);
                     //$('#show').append(document.createElement('br'));
-                    document.getElementById( 'bottom' ).scrollIntoView();
+                    //document.getElementById( 'bottom' ).scrollIntoView();
                     
 
                     //var objDiv = document.getElementById("show");
@@ -51,15 +51,14 @@ var spamMessages = [
  
 </HEAD>
 <BODY>
-    <br>
-    <br>
-    <div id="show" style="white-space: pre-wrap;      /* CSS3 */
-    white-space: -moz-pre-wrap; /* Firefox */
-    white-space: -pre-wrap;     /* Opera <7 */
-    white-space: -o-pre-wrap;   /* Opera 7 */
-    word-wrap: break-word; overflow:auto; height:50%; width:50%; border:1px solid black;" align="center"></div>
-    <div id="bottom"></div>
-    <input style="height:10%; width:50%; border:1px solid black;" placeholder="Send a message"> </input>
+    <div id="chatbox" class="exploder">
+        <div id="chat-header">
+            <span>Welcome to the chat</span>
+        </div>
+        <div id="show" align="center"></div>
+        <div id="bottom"></div>
+        <input style="height:10%; width:50%; border:1px solid black;" placeholder="Send a message"> </input>
+    </div>
     
 </BODY>
 </HTML>

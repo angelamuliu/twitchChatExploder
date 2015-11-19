@@ -1,4 +1,33 @@
 
+body {
+    margin: 0;
+    font: 12px "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+#chatbox {
+    background-color: #f2f2f2;
+}
+
+#chat-header {
+    padding: 20px;
+    text-align: center;
+    box-shadow: inset 0 -1px 0 0 #dedede;
+    font-size: 14px;
+}
+
+#show {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap; /* Firefox */
+    white-space: -pre-wrap;     /* Opera <7 */
+    white-space: -o-pre-wrap;   /* Opera 7 */
+    word-wrap: break-word;
+    overflow:auto;
+    height: 100vh;
+    width: 100%;
+}
+
+
+
 .message {
     word-wrap: break-word;
     width: 100%;
@@ -13,3 +42,13 @@ span.name {
 span.message_content {
 
 }
+
+/* Exploder styles */
+#chatbox.exploder {
+    margin: 0 auto;
+    width: 50%;
+}
+
+/* Color styles */
+.red { color: red; }
+.blue { color: blue; }
