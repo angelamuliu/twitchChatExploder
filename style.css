@@ -2,10 +2,13 @@
 body {
     margin: 0;
     font: 12px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-align: center;
 }
 
-#chatbox {
+.chatbox {
     background-color: #f2f2f2;
+    height: 100%;
+    text-align: initial;
 }
 
 .chat-header {
@@ -22,7 +25,7 @@ body {
     text-align: center;
 }
 
-#show {
+#show, #goodChat {
     white-space: pre-wrap;
     white-space: -moz-pre-wrap; /* Firefox */
     white-space: -pre-wrap;     /* Opera <7 */
@@ -74,13 +77,29 @@ span.message_content {
 }
 
 /* Exploder styles */
-#chatbox.exploder {
+.chatbox.exploder {
     margin: 0 auto;
     width: 50%;
 }
 #show.exploder { 
     height: 70vh;
 }
+
+/* Two CHATBOX styles */
+.chatbox.spamChat {
+    background-color: #B7B7B7;
+}
+.chatbox.spamChat, .chatbox.goodChat {
+    width: 40%;
+    display: inline-block;
+}
+
+#show.spamChat, #goodChat {
+    height: 70vh;
+}
+
+
+
 
 /* Color styles */
 .red { color: red; }

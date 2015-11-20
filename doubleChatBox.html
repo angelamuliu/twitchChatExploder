@@ -1,8 +1,9 @@
 <HTML>
 <HEAD>
-<TITLE>Crunchify - Refresh Div without Reloading Page</TITLE>
+<TITLE>Twitch Chat Exploder x2</TITLE>
  
 <meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="style.css">
 <style type="text/css">
 </style>
@@ -11,111 +12,112 @@
     <script type="text/javascript"
     src="twitchers.js"></script>
 <script>
-    
-var kappaLink = "http://static-cdn.jtvnw.net/emoticons/v1/25/1.0";
-
-function Message(name, message) {
-    this.name = name;
-    this.message = message;
+var spam_prevMsg = 0;
+function addSpam() {
+    var x = chooseUniqueRandom(spamMessages, spam_prevMsg);
+    var message = spamMessages[x];
+    spam_prevMsg = x;
+    addMessage(message, true);
 }
 
-    var casualPercentage = 90;
-    var goodPercentage = 100;
-    var prevMsg = 0;
-    function doSomething() {
-        var messages = spamMessages;
-        var x = Math.floor((Math.random() * messages.length)); 
-        while (prevMsg == x)
-            x = Math.floor((Math.random() * messages.length)); 
-        var newMsg = $("<div class=\"message\"></div>");
-        var msgName = $("<span class=\"name "+messages[x].color+"\">"+messages[x].name+"</span>");
-        var msgContent = $("<span class=\"message_content\">"+messages[x].message+"</span>");
-        newMsg.append(msgName);
-        newMsg.append(msgContent);
+var question_prevMsg = 0;
+function addQuestion() {
+    if (question_prevMsg >= goodMessages_set1.length) {
+        alert("You are done!");
+    }
+    var message = goodMessages_set2[question_prevMsg];
+    addMessage(message, false);
+    question_prevMsg++;
+}
 
+var chatter_prevMsg = 0;
+function addChatter() {
+    var x = chooseUniqueRandom(casualMessages, chatter_prevMsg);
+    var message = casualMessages[x];
+    chatter_prevMsg = x;
+    addMessage(message, false);
+}
+
+function chooseUniqueRandom(messageArr, prevMsg_index) {
+    var x = Math.floor((Math.random() * messageArr.length));
+    while (prevMsg_index === x) { // Prevent same message from happening twice
+        x = Math.floor((Math.random() * messageArr.length));
+    }
+    return x;
+}
+
+// Given a message OBJ, appends to the chatbox
+function addMessage(message, isSpam) {
+    var newMsg = $("<div class=\"message\"></div>");
+    var msgName = $("<span class=\"name "+message.color+"\">"+message.name+": </span>");
+    var msgContent = $("<span class=\"message_content\">"+message.message+"</span>");
+    newMsg.append(msgName);
+    newMsg.append(msgContent);
+    if (isSpam) {
         $('#show').append(newMsg);
-        document.getElementById( 'bottom' ).scrollIntoView();
-
-
-        var objDiv = document.getElementById("show");
-        objDiv.scrollTop = objDiv.scrollHeight;
-        prevMsg = x;
+    } else {
+        $("#goodChat").append(newMsg);
     }
-    
-    function doSomething2() {
-        casualPercentage = 30;
-        var whichGroup = Math.floor((Math.random() * 100)); 
-        if (whichGroup < casualPercentage) 
-            var messages = casualMessages;
-        else 
-            var messages = goodMessages_set1;
-        var x = Math.floor((Math.random() * messages.length)); 
-        while (prevMsg == x)
-            x = Math.floor((Math.random() * messages.length)); 
-        var newMsg = $("<div class=\"message\"></div>");
-        var msgName = $("<span class=\"name "+messages[x].color+"\">"+messages[x].name+"</span>");
-        var msgContent = $("<span class=\"message_content\">"+messages[x].message+"</span>");
-        newMsg.append(msgName);
-        newMsg.append(msgContent);
+    document.getElementById( 'bottom' ).scrollIntoView();
+    var objDiv = document.getElementById("show");
+    objDiv.scrollTop = objDiv.scrollHeight;
+}
 
-        $('#goodChat').append(newMsg);
-        document.getElementById( 'bottom' ).scrollIntoView();
+$(document).ready(function() {
 
-
-        var objDiv = document.getElementById("goodChat");
-        objDiv.scrollTop = objDiv.scrollHeight;
-        prevMsg = x;
+    function initSpam() { // Every 1 - 3 seconds
+        addSpam();
+        var timeSpan = (Math.floor(Math.random() * 3) * 1000) + 1000;
+        setTimeout(initSpam, timeSpan);
     }
-    
-    $(document).ready(
-            function() {
-                (function loop() {
-                    var rand = Math.round(Math.random() * (1000)) + 500;
-                    setTimeout(function() {
-                        doSomething();
-                        loop();  
-                    }, rand);
-                }());
-            });
-    
-    $(document).ready(
-            function() {
-                (function loop() {
-                    var rand = Math.round(Math.random() * (1000)) + 500;
-                    setTimeout(function() {
-                        doSomething2();
-                        loop();  
-                    }, rand);
-                }());
-            });
+
+    function initChatter() { // Every 6 - 8 seconds
+        addChatter();
+        var timeSpan = (Math.floor(Math.random() * 3)*1000) + 6000;
+        setTimeout(initChatter, timeSpan);
+    }
+
+    function initQuestions() { // Every 12 - 15 seconds
+        addQuestion();
+        var timeSpan = (Math.floor(Math.random() * 4) * 1000) + 12000;
+        setTimeout(initQuestions, timeSpan);
+    }
+
+    initSpam();
+    setTimeout(initChatter, 1000);
+    setTimeout(initQuestions, 5000);
+});
 </script>
  
 </HEAD>
 <BODY>
-    <br>
-    <br>
-    <div>
-    <div style="float:left;">
-    <div id="show" style="white-space: pre-wrap;      /* CSS3 */
-    white-space: -moz-pre-wrap; /* Firefox */
-    white-space: -pre-wrap;     /* Opera <7 */
-    white-space: -o-pre-wrap;   /* Opera 7 */
-    float:left;
-    word-wrap: break-word; overflow:auto; height:40%; width:40%; border:1px solid black;" align="center"></div>
-    <div id="bottom"></div>
-    <input style="height:10%; width:40%; border:1px solid black; float:left;" placeholder="Send a message"> </input>
+    <div class="chatbox goodChat">
+        <div class="chat-header">
+            <i class="fa fa-align-left"></i>
+            <div>Welcome to the chat</div>
+        </div>
+        <div id="goodChat" class="goodChat"></div>
+        <div id="bottom"></div>
+        <div class="send_message">
+            <input placeholder="Send a message"></input>
+            <i class="fa fa-cog"></i>
+            <i class="fa fa-list-ul"></i>
+            <button>Chat</button>
+        </div>
     </div>
-        
-    <div>    
-    <div id="goodChat" style="white-space: pre-wrap;      /* CSS3 */
-    white-space: -moz-pre-wrap; /* Firefox */
-    white-space: -pre-wrap;     /* Opera <7 */
-    white-space: -o-pre-wrap;   /* Opera 7 */
-    float:left;
-    word-wrap: break-word; overflow:auto; height:50%; width:40%; border:1px solid black;" align="center"></div>
-    <div id="bottom"></div>
-    <input style="height:10%; width:40%; border:1px solid black;" placeholder="Send a message"> </input>
-    </div>
+
+    <div class="chatbox spamChat">
+        <div class="chat-header">
+            <i class="fa fa-align-left"></i>
+            <div>Welcome to the darkside.</div>
+        </div>
+        <div id="show" class="spamChat"></div>
+        <div class="send_message">
+            <input placeholder="Send a message"></input>
+            <i class="fa fa-cog"></i>
+            <i class="fa fa-list-ul"></i>
+            <button>Chat</button>
+        </div>
     </div>
 </BODY>
 </HTML>
