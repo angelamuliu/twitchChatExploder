@@ -12,6 +12,13 @@
     <script type="text/javascript"
     src="twitchers.js"></script>
 <script>
+
+function shuffle(o){
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+}
+shuffle(goodMessages_set2);
+
 var spam_prevMsg = 0;
 function addSpam() {
     var x = chooseUniqueRandom(spamMessages, spam_prevMsg);
@@ -22,12 +29,19 @@ function addSpam() {
 
 var question_prevMsg = 0;
 function addQuestion() {
-    if (question_prevMsg >= goodMessages_set1.length) {
+    if (question_prevMsg >= goodMessages_set2.length) {
         alert("You are done!");
     }
     var message = goodMessages_set2[question_prevMsg];
     addMessage(message, false);
     question_prevMsg++;
+}
+
+var questionSpam_prevMsg = 0;
+function addQuestion_toSpam() {
+    var message = goodMessages_set2_inSpam[questionSpam_prevMsg];
+    addMessage(message, true);
+    questionSpam_prevMsg++;
 }
 
 var chatter_prevMsg = 0;
@@ -77,15 +91,24 @@ $(document).ready(function() {
         setTimeout(initChatter, timeSpan);
     }
 
-    function initQuestions() { // Every 12 - 15 seconds
+    function initQuestions() { // Every 18 - 21 seconds
         addQuestion();
-        var timeSpan = (Math.floor(Math.random() * 4) * 1000) + 12000;
+        var timeSpan = (Math.floor(Math.random() * 4) * 1000) + 18000;
         setTimeout(initQuestions, timeSpan);
+    }
+
+    function initSpamQuestions() { // Every 1.5 minutes
+        addQuestion_toSpam();
+        if (questionSpam_prevMsg < goodMessages_set2_inSpam.length - 1) {
+            var timeSpan = (Math.floor(Math.random() * 4) * 1000) + 90000;
+            setTimeout(initSpamQuestions, timeSpan);
+        }
     }
 
     initSpam();
     setTimeout(initChatter, 1000);
     setTimeout(initQuestions, 5000);
+    setTimeout(initSpamQuestions, 45000);
 });
 </script>
  

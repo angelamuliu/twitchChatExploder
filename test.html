@@ -8,6 +8,13 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="twitchers.js"></script>
 <script>
+
+function shuffle(o){
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+}
+shuffle(goodMessages_set1);
+
 var spam_prevMsg = 0;
 function addSpam() {
     var x = chooseUniqueRandom(spamMessages, spam_prevMsg);
@@ -69,9 +76,9 @@ $(document).ready(function() {
         setTimeout(initChatter, timeSpan);
     }
 
-    function initQuestions() { // Every 12 - 15 seconds
+    function initQuestions() { // Every 18 - 21 seconds
         addQuestion();
-        var timeSpan = (Math.floor(Math.random() * 4) * 1000) + 12000;
+        var timeSpan = (Math.floor(Math.random() * 4) * 1000) + 18000;
         setTimeout(initQuestions, timeSpan);
     }
 

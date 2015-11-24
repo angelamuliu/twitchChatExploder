@@ -87,7 +87,8 @@ span.message_content {
 
 /* Two CHATBOX styles */
 .chatbox.spamChat {
-    background-color: #B7B7B7;
+    background-color: #2F2F2F;
+    color: #E8E8E8;
 }
 .chatbox.spamChat, .chatbox.goodChat {
     width: 40%;
