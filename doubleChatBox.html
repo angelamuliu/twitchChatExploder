@@ -69,12 +69,15 @@ function addMessage(message, isSpam) {
     newMsg.append(msgContent);
     if (isSpam) {
         $('#show').append(newMsg);
+        document.getElementById( 'dark_bottom' ).scrollIntoView();
+        var objDiv = document.getElementById("show");
+        objDiv.scrollTop = objDiv.scrollHeight;
     } else {
         $("#goodChat").append(newMsg);
+        document.getElementById( 'good_bottom' ).scrollIntoView();
+        var objDiv = document.getElementById("goodChat");
+        objDiv.scrollTop = objDiv.scrollHeight;
     }
-    document.getElementById( 'bottom' ).scrollIntoView();
-    var objDiv = document.getElementById("show");
-    objDiv.scrollTop = objDiv.scrollHeight;
 }
 
 $(document).ready(function() {
@@ -120,7 +123,7 @@ $(document).ready(function() {
             <div>Welcome to the chat</div>
         </div>
         <div id="goodChat" class="goodChat"></div>
-        <div id="bottom"></div>
+        <div id="good_bottom"></div>
         <div class="send_message">
             <input placeholder="Send a message"></input>
             <i class="fa fa-cog"></i>
@@ -135,6 +138,7 @@ $(document).ready(function() {
             <div>Welcome to the darkside.</div>
         </div>
         <div id="show" class="spamChat"></div>
+        <div id="dark_bottom"></div>
         <div class="send_message">
             <input placeholder="Send a message"></input>
             <i class="fa fa-cog"></i>
